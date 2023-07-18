@@ -1,6 +1,8 @@
 async function renderProducts() {
   const container = document.getElementById("productContainer");
-  container.style.display = "flex";
+    container.style.display = "flex";
+    container.style.flexDirection = "row";
+  
   container.innerHTML = "";
   if(document.getElementById('hidden-form').style.display = "flex"){
     document.getElementById('hidden-form').style.display = "none";

@@ -1,6 +1,7 @@
 async function renderAdminProducts() {
     const container = document.getElementById("productContainer");
     container.style.display = "flex";
+    container.style.flexDirection = "row";
     container.innerHTML = "";
     document.getElementById('hidden-form').style.display = "none";
 

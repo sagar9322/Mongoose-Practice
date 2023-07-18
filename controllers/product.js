@@ -1,5 +1,6 @@
 const Product = require('../models/app-product');
 const User = require('../models/user');
+const Order = require('../models/order');
 
 exports.getProduct = (req, res, next) => {
     Product.find().then((product) => {
@@ -52,8 +53,7 @@ exports.deleteCartItem = (req, res, next) => {
 }
 
 exports.getOrderItem = (req, res, next) => {
-  req.user
-    .getOrders()
+  Order.find({ 'user.userId': req.user._id })
     .then(orders => {
       res.send(JSON.stringify(orders));
       })

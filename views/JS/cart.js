@@ -62,11 +62,9 @@ function getCart() {
             // Add an event listener to the "Order Now" button
                 orderButton.onclick = (event) => {
                     event.preventDefault();
-                    axios.get('http://localhost:3000/order-now')
-                    // container.removeChild(productDiv);
-                    setTimeout(() => {
+                    axios.get('http://localhost:3000/order-now').then(res => {
                         getCart();
-                    }, 300);
+                    })
 
                 }
 

@@ -1,7 +1,19 @@
 function getOrders() {
-    
+
     axios.get('http://localhost:3000/order-item').then(response => {
         const orders = response.data;
+       
+        if(orders.length === 0){
+            
+            const container = document.getElementById("productContainer");
+            document.getElementById('hidden-form').style.display = "none";
+            container.innerHTML = "";
+            const h1 = document.createElement('h1');
+            h1.textContent = "No any Orders🙅";
+            h1.style.color = "blue";
+            container.appendChild(h1);
+        }else{
+
         // Get the container element to display the order items
         document.getElementById('hidden-form').style.display = "none";
         const container = document.getElementById("productContainer");
@@ -20,9 +32,9 @@ function getOrders() {
             orderDiv.appendChild(orderId);
 
             const items = document.createElement("ul");
-            order.items.forEach(item => {
+            order.products.forEach(item => {
                 const listItem = document.createElement("li");
-                listItem.textContent = item.title + " - Quantity: " + item.quantity;
+                listItem.textContent = item.product.title + " - Quantity: " + item.quantity;
                 items.appendChild(listItem);
             });
             orderDiv.appendChild(items);
@@ -30,6 +42,8 @@ function getOrders() {
             // Add the order div to the container
             container.appendChild(orderDiv);
         });
+        }
+
     })
         .catch(error => {
             console.log(error);

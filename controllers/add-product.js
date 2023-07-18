@@ -1,5 +1,7 @@
 const Product = require('../models/app-product');
 const mongoDb = require('mongodb');
+const Order = require('../models/order');
+const User = require('../models/user');
 
 
 exports.addProduct = (req, res, next) => {
@@ -26,7 +28,7 @@ exports.addProduct = (req, res, next) => {
 };
 
 exports.editProduct = (req, res, next) => {
-  console.log(req.body)
+  
   const prodId = req.params.productId;
   const updatedTitle = req.body.title;
   const updatedImageUrl = req.body.image;
@@ -61,11 +63,27 @@ exports.addToCart = (req, res, next) => {
 
 
 exports.orderPost = (req, res, next) => {
-  req.user
-    .addOrder()
+  User.findById(req.user._id)
+    .populate('cart.items.productId')
+    .exec()
+    .then(user => {
+      const products = user.cart.items.map(i => {
+        return { quantity: i.quantity, product: { ...i.productId._doc } };
+      });
+      const order = new Order({
+        user: {
+          name: req.user.name,
+          userId: req.user
+        },
+        products: products
+      });
+      return order.save();
+    })
     .then(result => {
-      console.log('orderd');
-      res.status(200).json({ success: true });
+      return req.user.clearCart();
+    })
+    .then(() => {
+      res.status(200).json({success:true});
     })
     .catch(err => console.log(err));
 }
