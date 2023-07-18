@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerse App</title>
+    <link rel="stylesheet" href="../CSS/home.css">
+    <link rel="stylesheet" href="../CSS/add-product.css">
+    <link rel="stylesheet" href="../CSS/product-page.css">
+    <link rel="stylesheet" href="../CSS/admin-page.css">
+    <link rel="stylesheet" href="../CSS/cart.css">
+
+</head>
+
+<body>
+    <header class="main_header">
+        <nav class="nav_bar">
+            <ul class="nav_itemlist">
+                <li class="item"><a href="../HTML/home.html">Home</a></li>
+                <li class="item"><a href="javascript: renderProducts()" id="product_page">Products</a></li>
+                <li class="item"><a href="javascript: getOrders()">Order</a></li>
+                <li class="item"><a href="../HTML/add-product.html">Add Product</a></li>
+                <li class="item"><a href="javascript: renderAdminProducts()" id="admin_product">Admin Product</a></li>
+                <li class="item"><a href="javascript: getCart()">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="productContainer">
+
+        </div>
+        <div id="hidden-form">
+
+            <div class="container">
+                <h2 class="form-heading" id="form_heading">Add Product</h2>
+                <form class="form-control" action="http://localhost:3000/add-product" method="POST" id="form">
+                    <label for="title-ip">Title:</label>
+                    <input type="text" name="title" id="title-ip">
+                    <label for="image-ip">Image url:</label>
+                    <input type="text" name="image" id="image-ip">
+                    <label for="price-ip">Price:</label>
+                    <input type="number" name="price" id="price-ip">
+                    <label for="description-ip">Descriptions:</label>
+                    <input type="text" name="description" id="description-ip">
+                    <button type="submit" class="btn" id="btn-product">Add Product</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../JS/product-page.js"></script>
+    <script src="../JS/admin-product.js"></script>
+    <script src="../JS/add-product.js"></script>
+    <script src="../JS/cart.js"></script>
+    <script src="../JS/order.js"></script>
+
+</body>
+
+</html>
