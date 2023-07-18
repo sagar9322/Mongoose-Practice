@@ -68,6 +68,7 @@ async function renderProducts() {
       addToCartButton.textContent = "Add to Cart";
 
       function addToCart(uniqId) {
+       
         addToCartButton.onclick = (event) => {
           event.preventDefault();
           axios.get(`http://localhost:3000/add-to-cart/${uniqId}`).then(()=> {

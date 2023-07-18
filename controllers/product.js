@@ -29,6 +29,7 @@ exports.getCart = (req, res, next) => {
     .populate('cart.items.productId')
     .exec()
     .then(user => {
+      
       const product = user.cart.items;
       
             res.send(JSON.stringify(product));
@@ -42,7 +43,7 @@ exports.deleteCartItem = (req, res, next) => {
     const prodId = req.params.productId;
     
   req.user
-    .deleteFromCart(prodId)
+    .removeFromCart(prodId)
     .then(result => {
       console.log("deleted");
       res.status(200).json({success:true});

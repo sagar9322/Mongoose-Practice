@@ -14,7 +14,7 @@ function getCart() {
         // Iterate over each product in the cart
         products.forEach(product => {
             
-            const uniqId = product._id;
+            const uniqId = product.productId._id;
             // Create a new div element for each product
             const productDiv = document.createElement("div");
             productDiv.classList.add("cart-item");
@@ -88,6 +88,7 @@ function getCart() {
 
 
 function deleteFromCart(uniqId) {
+    
     axios.delete(`http://localhost:3000/delete-cart/${uniqId}`).then(()=> {
         getCart();
     });
