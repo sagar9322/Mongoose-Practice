@@ -16,7 +16,7 @@ exports.showDetails = (req, res, next)=> {
 }
 exports.deleteProductDetail = (req, res, next) => {
     const prodId = req.params.productId;
-    Product.delete(prodId)
+    Product.findByIdAndRemove(prodId)
     .then(result => {
       console.log("deleted Successfully");
     })

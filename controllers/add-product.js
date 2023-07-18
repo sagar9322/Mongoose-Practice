@@ -11,7 +11,8 @@ exports.addProduct = (req, res, next) => {
     title: title,
     price: price,
     description: description,
-    imageUrl: imageUrl
+    imageUrl: imageUrl,
+    userId: req.user
   });
   product
     .save()
@@ -25,13 +26,20 @@ exports.addProduct = (req, res, next) => {
 };
 
 exports.editProduct = (req, res, next) => {
+  console.log(req.body)
   const prodId = req.params.productId;
   const updatedTitle = req.body.title;
   const updatedImageUrl = req.body.image;
   const updatedPrice = req.body.price;
   const updatedDescription = req.body.description;
-  const product = new Product(updatedTitle, updatedPrice, updatedDescription, updatedImageUrl, new mongoDb.ObjectId(prodId));
-  product.update()
+ Product.findById(prodId).then(product => {
+  product.title = updatedTitle;
+  product.imageUrl = updatedImageUrl;
+  product.price = updatedPrice;
+  product.description = updatedDescription;
+     return product.save()
+ })
+ 
     .then((result) => {
       console.log(`product updated.`);
     })
