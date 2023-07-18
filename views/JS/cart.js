@@ -1,4 +1,5 @@
 function getCart() {
+    
     axios.get('http://localhost:3000/get-cart').then(response => {
         const products = response.data;
         document.getElementById('hidden-form').style.display = "none";
@@ -12,6 +13,7 @@ function getCart() {
 
         // Iterate over each product in the cart
         products.forEach(product => {
+            
             const uniqId = product._id;
             // Create a new div element for each product
             const productDiv = document.createElement("div");
@@ -19,11 +21,11 @@ function getCart() {
 
             // Display the product details
             const title = document.createElement("h3");
-            title.textContent = product.title;
+            title.textContent = product.productId.title;
             productDiv.appendChild(title);
 
             const price = document.createElement("p");
-            price.textContent = "Price: " + product.price;
+            price.textContent = "Price: " + product.productId.price;
             productDiv.appendChild(price);
 
             const quantity = document.createElement("p");

@@ -1,4 +1,5 @@
 const Product = require('../models/app-product');
+const User = require('../models/user');
 
 exports.getProduct = (req, res, next) => {
     Product.find().then((product) => {
@@ -24,9 +25,11 @@ exports.deleteProductDetail = (req, res, next) => {
 }
 
 exports.getCart = (req, res, next) => {
-    req.user
-    .getCart()
-    .then(product => {
+  User.findById(req.user._id)
+    .populate('cart.items.productId')
+    .exec()
+    .then(user => {
+      const product = user.cart.items;
       
             res.send(JSON.stringify(product));
         })
